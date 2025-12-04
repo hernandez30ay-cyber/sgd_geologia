@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Subir documento</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Proyecto:</label>
+    <select name="proyecto_id" class="form-control mb-3">
+        {% for p in proyectos %}
+        <option value="{{ p.id }}">{{ p.nombre }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Archivo:</label>
+    <input type="file" name="archivo" class="form-control mb-3">
+
+    <label>Descripción:</label>
+    <input name="descripcion" class="form-control mb-3">
+
+    <button class="btn btn-primary">Subir</button>
+</form>
+
+{% if creado %}
+<div class="alert alert-success mt-3">
+    Archivo subido exitosamente: <strong>{{ creado }}</strong>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Documentos</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Proyecto</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>Versión</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in documents %}
+        <tr>
+            <td>{{ d.nombre }}</td>
+            <td>{{ d.proyecto.nombre }}</td>
+            <td>{{ d.tipo }}</td>
+            <td>{{ d.estado }}</td>
+            <td>{{ d.version }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="mb-4">Dashboard</h3>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card bg-primary text-white p-3">
+            <h5>Total Proyectos</h5>
+            <h1>{{ total_projects }}</h1>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card bg-success text-white p-3">
+            <h5>Total Documentos</h5>
+            <h1>{{ total_documents }}</h1>
+        </div>
+    </div>
+
+</div>
+
+<hr>
+
+<h4>Proyectos Recientes</h4>
+<ul>
+    {% for p in recent_projects %}
+        <li>{{ p.nombre }} — {{ p.cliente }}</li>
+    {% empty %}
+        <li>No hay proyectos</li>
+    {% endfor %}
+</ul>
+
+<h4>Documentos Recientes</h4>
+<ul>
+    {% for d in recent_documents %}
+        <li>{{ d.nombre }} — {{ d.tipo }}</li>
+    {% empty %}
+        <li>No hay documentos</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

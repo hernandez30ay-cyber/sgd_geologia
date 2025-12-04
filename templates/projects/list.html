@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Proyectos</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cliente</th>
+            <th>Ubicación</th>
+            <th>Responsable</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in projects %}
+        <tr>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.cliente }}</td>
+            <td>{{ p.ubicacion }}</td>
+            <td>{{ p.responsable }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="mb-3">Chatbot Inteligente</h3>
+
+<div class="card p-4">
+
+    <label>Seleccionar documento (opcional)</label>
+    <select id="document_id" class="form-control mb-3">
+        <option value="">-- Ninguno --</option>
+        {% for d in documents %}
+            <option value="{{ d.id }}">{{ d.nombre }}</option>
+        {% endfor %}
+    </select>
+
+    <label>Mensaje</label>
+    <textarea id="prompt" class="form-control mb-3" rows="4"></textarea>
+
+    <button class="btn btn-primary w-100" onclick="enviarMensaje()">Enviar</button>
+
+</div>
+
+<div class="card mt-4 p-3">
+    <h5>Respuesta:</h5>
+    <div id="respuesta" class="p-2" style="white-space:pre-wrap;"></div>
+</div>
+
+<script>
+async function enviarMensaje() {
+    const prompt = document.getElementById("prompt").value;
+    const docId = document.getElementById("document_id").value;
+
+    let endpoint = "/api/chatbot/";
+    let payload = { prompt: prompt };
+
+    if (docId) {
+        endpoint = "/api/chatbot/documents/";
+        payload.document_id = parseInt(docId);
+    }
+
+    const r = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await r.json();
+
+    document.getElementById("respuesta").innerText = data.response;
+}
+</script>
+
+{% endblock %}
